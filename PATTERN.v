@@ -10,7 +10,15 @@ module PATTERN(
         r5_addr, d5,
         r6_addr, d6,
         r7_addr, d7,
-        r8_addr, d8
+        r8_addr, d8,
+        r9_addr, d9,
+        r10_addr, d10,
+        r11_addr, d11,
+        r12_addr, d12,
+        r13_addr, d13,
+        r14_addr, d14,
+        r15_addr, d15,
+        r16_addr, d16
         );
 
 parameter BLOCKSIZE = 10;
@@ -22,12 +30,15 @@ output reg en_w1;
 output reg [BLOCKSIZE:0] r1_addr, r2_addr;
 output reg [BLOCKSIZE:0] r3_addr, r4_addr;
 output reg [BLOCKSIZE:0] r5_addr, r6_addr, r7_addr, r8_addr;
+output reg [BLOCKSIZE:0] r9_addr, r10_addr, r11_addr, r12_addr;
+output reg [BLOCKSIZE:0] r13_addr, r14_addr, r15_addr, r16_addr;
 
 output reg [BLOCKSIZE:0] w1_addr;
 output reg [31:0] w1_din;
 
 input [31:0] d1, d2, d3, d4;
 input [31:0] d5, d6, d7, d8;
+input [31:0] d9, d10, d11, d12, d13, d14, d15, d16;
 /////// INOUT_PORTS ////////
 integer mem[0:(2 << BLOCKSIZE) - 1];
 
@@ -50,6 +61,14 @@ initial begin
         r6_addr = 0;
         r7_addr = 0;
         r8_addr = 0;
+        r9_addr = 0;
+        r10_addr = 0;
+        r11_addr = 0;
+        r12_addr = 0;
+        r13_addr = 0;
+        r14_addr = 0;
+        r15_addr = 0;
+        r16_addr = 0;
         
         w1_addr = 0;
 
@@ -82,6 +101,14 @@ while(ccc == 0) begin
     r6_addr = $random(seed);
     r7_addr = $random(seed);
     r8_addr = $random(seed);
+    r9_addr = $random(seed);
+    r10_addr = $random(seed);
+    r11_addr = $random(seed);
+    r12_addr = $random(seed);
+    r13_addr = $random(seed);
+    r14_addr = $random(seed);
+    r15_addr = $random(seed);
+    r16_addr = $random(seed);
     
     w1_addr = $random(seed);
 
@@ -166,6 +193,62 @@ while(ccc == 0) begin
     if(d8 != mem[r8_addr]) begin
 
         $display("ERROR: R8 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d9 != mem[r9_addr]) begin
+        $display("ERROR:R9 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d10 != mem[r10_addr]) begin
+        $display("ERROR:R10 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d11 != mem[r11_addr]) begin
+        $display("ERROR:R11 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d12 != mem[r12_addr]) begin
+        $display("ERROR:R12 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d13 != mem[r13_addr]) begin
+        $display("ERROR:R13 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d14 != mem[r14_addr]) begin
+        $display("ERROR:R14 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d15 != mem[r15_addr]) begin
+        $display("ERROR:R15 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d16 != mem[r16_addr]) begin
+        $display("ERROR:R16 address is wrong");
         @(negedge clk);
         @(negedge clk);
         $finish;
