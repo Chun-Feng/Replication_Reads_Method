@@ -4,7 +4,9 @@ module PATTERN(
         clk, rst,
         w1_addr, w1_din, en_w1,
         r1_addr, d1,
-        r2_addr, d2
+        r2_addr, d2,
+        r3_addr, d3,
+        r4_addr, d4
         );
 
 parameter BLOCKSIZE = 10;
@@ -14,11 +16,12 @@ output reg rst;
 output reg en_w1;
 
 output reg [BLOCKSIZE:0] r1_addr, r2_addr;
+output reg [BLOCKSIZE:0] r3_addr, r4_addr;
 
 output reg [BLOCKSIZE:0] w1_addr;
 output reg [31:0] w1_din;
 
-input [31:0] d1, d2;
+input [31:0] d1, d2, d3, d4;
 /////// INOUT_PORTS ////////
 integer mem[0:(2 << BLOCKSIZE) - 1];
 
@@ -35,6 +38,8 @@ initial begin
 
         r1_addr = 0;
         r2_addr = 0;
+        r3_addr = 0;
+        r4_addr = 0;
         
         w1_addr = 0;
 
@@ -44,7 +49,7 @@ initial begin
         ccc = 0;
         times = 0;
 
-for(i = 0 ; i< (2 << BLOCKSIZE); i = i + 1)
+for(i = 0 ; i < (2 << BLOCKSIZE); i = i + 1)
             mem[i] = 0;
 
 @(negedge clk);
@@ -61,6 +66,8 @@ while(ccc == 0) begin
 
     r1_addr = $random(seed);
     r2_addr = $random(seed);
+    r3_addr = $random(seed);
+    r4_addr = $random(seed);
     
     w1_addr = $random(seed);
 
@@ -93,6 +100,24 @@ while(ccc == 0) begin
         
         $display("ERROR:R2 address = %d, golden answer is %d, your is %d", r2_addr, mem[r2_addr], d2);
         
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d3 != mem[r3_addr]) begin
+
+        $display("ERROR:R3 address = %d, golden answer is %d, your is %d", r3_addr, mem[r3_addr], d3);
+
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d4 != mem[r4_addr])  begin
+        
+        $display("ERROR:R4 address = %d, golden answer is %d, your is %d", r4_addr, mem[r4_addr], d4);
+
         @(negedge clk);
         @(negedge clk);
         $finish;
