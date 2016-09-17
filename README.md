@@ -54,7 +54,7 @@ you could send by email to me or leave issues in github.
 
 When I saw it, I'll as soon as possible to resolve problem.
 
-Thans!!!
+Thanks!!!
 
 //////////////////////////////////////////////////////////////////////////////////////
 
