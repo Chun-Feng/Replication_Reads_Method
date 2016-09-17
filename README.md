@@ -6,7 +6,7 @@
 Replicating BRAMs to support multiple reads without complex control logics(multiplexor).
 
 
-Replication is widely adopted technique to increase readports. 
+Replication is widely adopted technique to increase read ports. 
 
 This technique enables multiple read prots by replicating the data to multiple BRAMs (Blcok RAMs). 
 
