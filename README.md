@@ -58,4 +58,4 @@ Thans!!!
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-First, saw "READme.d" file; second, saw "Memory_design" file.
+First, saw "README.md" file; second, saw "Memory_design" file.
