@@ -6,7 +6,11 @@ module PATTERN(
         r1_addr, d1,
         r2_addr, d2,
         r3_addr, d3,
-        r4_addr, d4
+        r4_addr, d4,
+        r5_addr, d5,
+        r6_addr, d6,
+        r7_addr, d7,
+        r8_addr, d8
         );
 
 parameter BLOCKSIZE = 10;
@@ -17,11 +21,13 @@ output reg en_w1;
 
 output reg [BLOCKSIZE:0] r1_addr, r2_addr;
 output reg [BLOCKSIZE:0] r3_addr, r4_addr;
+output reg [BLOCKSIZE:0] r5_addr, r6_addr, r7_addr, r8_addr;
 
 output reg [BLOCKSIZE:0] w1_addr;
 output reg [31:0] w1_din;
 
 input [31:0] d1, d2, d3, d4;
+input [31:0] d5, d6, d7, d8;
 /////// INOUT_PORTS ////////
 integer mem[0:(2 << BLOCKSIZE) - 1];
 
@@ -40,6 +46,10 @@ initial begin
         r2_addr = 0;
         r3_addr = 0;
         r4_addr = 0;
+        r5_addr = 0;
+        r6_addr = 0;
+        r7_addr = 0;
+        r8_addr = 0;
         
         w1_addr = 0;
 
@@ -68,6 +78,10 @@ while(ccc == 0) begin
     r2_addr = $random(seed);
     r3_addr = $random(seed);
     r4_addr = $random(seed);
+    r5_addr = $random(seed);
+    r6_addr = $random(seed);
+    r7_addr = $random(seed);
+    r8_addr = $random(seed);
     
     w1_addr = $random(seed);
 
@@ -118,6 +132,40 @@ while(ccc == 0) begin
         
         $display("ERROR:R4 address = %d, golden answer is %d, your is %d", r4_addr, mem[r4_addr], d4);
 
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d5 != mem[r5_addr]) begin
+        
+        $display("ERROR:R5 address = %d, golden answer is %d, your is %d", r5_addr, mem[r5_addr], d5);
+
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d6 != mem[r6_addr]) begin
+
+        $display("ERROR:R6 address = %d, golden answer is %d, your is %d", r6_addr, mem[r6_addr], d6);
+
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d7 != mem[r7_addr]) begin
+        
+        $display("ERROR: R7 address is wrong");
+        @(negedge clk);
+        @(negedge clk);
+        $finish;
+    end
+
+    if(d8 != mem[r8_addr]) begin
+
+        $display("ERROR: R8 address is wrong");
         @(negedge clk);
         @(negedge clk);
         $finish;
